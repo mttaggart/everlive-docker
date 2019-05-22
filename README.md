@@ -133,7 +133,7 @@ Now, you as a user don't interact directly with Docker Engine. Neither do other 
 
 ### Images
 
-We've mentioned before that a container is a running instance of an image, but what _is_ an image? I like to think of an onion, or a nested doll. Starting from a base filesystem (usually a well-known Linux distribution or specially-created root image), layers of instructions are added to make the necesssary template, including all files and configuration described in the build instructions. 
+We've mentioned before that a container is a running instance of an image, but what _is_ an image? I like to think of an onion, or a nested doll. Starting from a base filesystem (usually a well-known Linux distribution or specially-created root image), layers of instructions are added to make the necesssary template, including all files and configuration described in the build instructions. These build instructions are written in special files known as `Dockerfile`s. 
 
 Each instruction adds a layer to the filesystem (increasing its size slightly). 
 
@@ -166,6 +166,22 @@ Docker Engine has the ability to define custom networks. Containers can be added
 It is so common to have networked containers making up a single application, Docker created a tool to easily deploy such applications. It's called **Docker Compose**.
 
 ### Docker Compose
+
+So you have your multi-container application. You've learned how to use the Docker CLI to bring containers up from custom images, link them with networks, and attach persistent storage with volumes. But doing so for each app and each version of each app is a HUGE PAIN. If only there were some way to describe the application's specification in a file, much as we do for images in a `Dockerfile`.
+
+Docker got you, fam.
+
+[Docker Compose](https://docs.docker.com/compose/overview/) allows you to describe your multi-container applications using a single YAML (YAM-ul) file. We'll go over the details of creating these files together, but for now it's important to know that these files define the containers, volumes, and networks that will make up your Docker applications. 
+
+After that, there's really only one thing to do: **SCALE**.
+
+### Docker Swarm
+
+Docker in Swarm mode: sounds like a plague of locusts, but no, it's when you you use multiple servers in concert to host your containers. Swarm mode is Docker's answer to the need for applications of massive scale. Using a single `docker-compose.yml` file, you can create load-balanced apps with multiple replicas of containers, hosted across multiple virtual (or physical!) servers.
+
+Swarm mode is the last chapter of the Docker story before moving beyond Docker and onto more complex orchestration technologies like Kubernetes. But before you take on that journey, we'll take some time to go over best practices for securing your containers.
+
+### Docker Secrets and Security Concerns
 
 
 
