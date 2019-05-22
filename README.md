@@ -111,7 +111,7 @@ Eventually, you'll make a change to your code. Instead of spinning up a whole ne
 
 ### Containers vs. VMs
 
-What _is_ the difference between containers and VMs, anyway? Put simply, the difference is scope. In a virtual machine, _everything_ is virtualized: the hard drive, the network interface, the display, and the entire operating system included in the bundle. That's true for _each_ VM, even is most of the parameters are the same. For example, if I have two VMs running the same version of Windows, each VM has a completely unique copy of all the stuff that makes up Windows. They can't share, by design. And even if the app running in that VM only needs a small subset of the Windows platform, too bad; the whole kit-n-kaboodle is coming along for the ride.
+What _is_ the difference between containers and VMs, anyway? Put simply, the difference is scope. In a virtual machine, _everything_ is virtualized: the hard drive, the network interface, the display, and the entire operating system included in the bundle. That's true for _each_ VM, even if most of the parameters are the same. For example, if I have two VMs running the same version of Windows, each VM has a completely unique copy of all the stuff that makes up Windows. They can't share, by design. And even if the app running in that VM only needs a small subset of the Windows platform, too bad; the whole kit-n-kaboodle is coming along for the ride.
 
 Sometimes that's what you want! For example, in a "thin client" scenario where you're virtualizing a desktop environment for users, the whole machine _should_ be available, unique to each user. But for an app where you know exactly which pieces of the OS you'll need? We can stand to trim down a bit.
 
@@ -183,7 +183,17 @@ Swarm mode is the last chapter of the Docker story before moving beyond Docker a
 
 ### Docker Secrets and Security Concerns
 
+Let's again consider our three-container application: web server, app code, and database. The database container will require a password for authentication, and the app container will require the same password information to connect to the database. How can we safely provide these credentials?
 
+You might think about adding them as environment variables when running the containers. Although, that's a bit fragile and doesn't survive bringing containers down/up without manual involvement. You could bake them straight into the `Dockerfile`, but then, if it's a public image or the code is stored on GitHub, the secrets are exposed. And what about things like SSH keys? You _really_ don't want those kicking around.
+
+Docker Secrets is a tool that pairs with Docker in swarm mode. Secrets are encrypted pieces of information that are stored in Docker's **Raft log**, an encrypted database that containers may be granted access to. The Raft log is securely shared across all nodes in a swarm. When making a `docker-compose.yml` and using secrets, you can specify which of your stored secrets a given service has access to. These will then be available in the service's containers at `/run/secrets/<secret-name>`. Many certified containers, such as [mysql](https://hub.docker.com/_/mysql) are configured to accept file locations as well as environment variables for sensitive information, meaning that you can provide database credentials as Docker secrets rather than explicitly-written passwords in a file.
+
+Another concern is trust. Odds are, you're going to be using someone else's Docker image to create your own containers. To ensure the image you're pulling was made by the right people, we now have **Docker Content Trust**.
+
+Simply put, DCT allows you and others to digitally sign the images you create. What's more, with Content Trust enabled on your Docker hosts, you may _only_ pull signed images, keeping you in the land of verified content.
+
+Another tool that helps DevOps teams manage best security practices for Docker is [Docker Bench](https://github.com/docker/docker-bench-security). This one-run image will test your configurations and make recommendations for improving your security posture. 
 
 
 
