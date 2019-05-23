@@ -10,19 +10,21 @@ And, do you have a terminal emulator? On Windows, I recommend [PuTTY](https://ww
 
 With that out of the way, let's look at our objectives.
 
-## Primary Objectives
+## Action Objectives
 
 1. Create 2 AWS Ubuntu 18.04 EC2 instances
 2. Connect to our instances over SSH
 3. Install Docker CE on each
 4. Run the `hello-world` image to verify our installation
+5. Run the `busybox` image and execute commands inside it.
 
-## Secondary Objectives
+## Learning Objectives
 
 1. Understand basic command line interaction
 2. Explore the `docker image` and `docker container` subcommands
 3. Log in to our Docker Hub account
 4. Execute a command in a container, from outside the container
+5. Understand the difference between `docker container exec` and `docker container attach`
 
 ## Bonus Objectives
 

@@ -31,7 +31,7 @@ Ever heard of an IP address? If so, you're good to go! Docker _does_ require som
 
 ## How to Use this Repository
 
-This repo contains session-specific folders that will include any starter files and scripts we'll need for each session. There's also a `README.md` with an overview of the session's content and activities. This file will also contain primary, secondary, and bonus completion objectives for each section.
+This repo contains session-specific folders that will include any starter files and scripts we'll need for each session. There's also a `README.md` with an overview of the session's content and activities. This file will also contain action and learning objectives for each section.
 
 ## Course Sections
 
