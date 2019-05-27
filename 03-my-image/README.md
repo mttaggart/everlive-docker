@@ -68,12 +68,6 @@ Let's start by making our `Dockerfile`.
 touch Dockerfile
 ```
 
-We also will need our website folder local to our build folder, so let's copy that over.
-
-```bash
-cp -r ../02-website/my-website ./
-```
-
 We'll now use a text editor (`vim` or `nano`) to create the specific instructions in this file.
 
 
@@ -83,7 +77,7 @@ We'll be using the `node` image, with the `10` tag. So the first line of our `Do
 FROM node:10
 ```
 
-We want to include our folder of code inside the image. We can do that with the `COPY` instruction.
+We want to include our website folder inside the image. We can do that with the `COPY` instruction.
 
 ```
 COPY my-website /my-website

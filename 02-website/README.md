@@ -6,14 +6,12 @@ Now that we have our Docker installation all sorted, we can get to work using th
 
 1. Start a basic web server using the `nginx` image
 2. Configure a container using the Docker CLI to mount our web content inside the container and serve it
-3. Use a custom `nginx.conf` to proxy from a web server container to a Node app using the `node` base image
-4. Use `docker pull` to get base images from the Docker Hub
+3. Use `docker pull` to get base images from the Docker Hub
 
 ## Learning Objectives
 
 1. Understand bind mounts and how to use them in `docker container run` commands
-2. Learn the basics of Nginx config file structures
-3. Understand exposing and translating ports from host to containers
+2. Understand exposing and translating ports from host to containers
 
 ## Bonus Objectives
 
