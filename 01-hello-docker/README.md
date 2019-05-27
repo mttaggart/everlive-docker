@@ -26,10 +26,6 @@ With that out of the way, let's look at our objectives.
 4. Execute a command in a container, from outside the container
 5. Understand the difference between `docker container exec` and `docker container attach`
 
-## Bonus Objectives
-
-1. Find a base image of your choosing, and get it running as a container on one of your instances.
-
 ## Installing Docker CE
 
 This directory has a script, `install-docker.sh`, which contains all the commands necessary to get Docker going on your nodes. You _could_ take the quick way and run:
@@ -45,3 +41,4 @@ cat ./install-docker.sh
 ```
 
 To print out the file's contents.
+
