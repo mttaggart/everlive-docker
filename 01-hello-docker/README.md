@@ -42,3 +42,49 @@ cat ./install-docker.sh
 
 To print out the file's contents.
 
+Let's go through each command.
+
+
+```bash
+#!/bin/bash
+```
+
+If you're new to shell scripts, this line is called the shebang. It tells the shell what interpreter to use to process the code in the script. `#!` is the shebang itself, followed by the path to the correct interpreter. You'll see `/bin/bash`, `/bin/sh`, and `/usr/bin/python` frequently in this line.
+
+```bash
+apt install \ 
+    apt-transport-https \
+    ca-certificates \
+    curl \
+    gnupg-agent \
+    software-properties-common
+```
+
+`apt` is the package manager for our Ubuntu Linux distribution. We're using it to install all the packages Docker will need to run correctly.
+
+```bash
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
+```
+
+`curl` is a handly command-line tool to interact with the web. You'll see it a few more times in this course. Here, we're using it to download Docker's public encryption key and add it to our package manager's keychain. This allows `apt` to verify that packages we try to download actually come from where they claim to.
+
+```bash
+add-apt-repository \
+   "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+   $(lsb_release -cs) \
+   stable"
+```
+
+`apt` relies on a list of repositories that hold catalogs of packages available for download. We're adding Docker's own repo to that list (which we can do now, since we have the public key for trust verification).
+
+```bash
+apt update
+```
+
+This tells `apt` to go update its available packages. We have to do this now that we've added a new repository to the list, but not yet downloaded its catalog of packages.
+
+```bash
+apt install docker-ce docker-ce-cli containerd.io
+```
+
+Finally, we install the newly-available packages from Docker's repo.
