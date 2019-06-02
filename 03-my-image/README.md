@@ -155,13 +155,31 @@ And lastly, the name of the image we will be starting the container from.
 
 This one's fairly simple. `docker image push <image>` will do the trick, EXCEPT that the image's name needs to begin with your username and a slash. To rename/retag an image, you can run `docker image tag <SOURCE> <NEW>`.
 
+## Bonus! Multi-stage builds
 
+It is often the case that our base images include way more than we need for our final application. This is especially common when using a versatile base image like `ubuntu`. Do we need all that good ubuntu-ness to run our web app? Maybe not. And definitely not in the case of `cowsay`. But using the bigger base image allows us to download and compile the resources we need. If only there were a way to do that, then keep what we need and discard the rest.
 
+Enter multi-stage builds. With this process, you can use a beefy base image like full-fat `ubuntu`, but then re-base on a slimmer image while keeping the parts you want from earlier stages.  
 
+If we look at the `my-website` image, you'll notice it's, uh, huge. Almost a gigabyte. Let's see if we can't trim that somewhat.
 
+We're using the `node:10` image as a base. That's great because we need the `npm` utility to download and install all the dependencies. But do we need `npm` and all the extra stuff in production?
 
+No. No we do not. Interestingly, the `node` image has an `alpine` variant that doesn't have all the bells and whistles. Let's see what happens when we use that as a second stage after we've installed all our materials.
 
+To do that, weadd the following after the `CMD npm install` line of our `Dockerfile`:
 
+```
+FROM node:10-alpine
+COPY --from=0 /my-website /my-website
+WORKDIR /my-website
+```
+
+The `FROM` line is what kicks off the second stage of the build. Now of course, since this is a new base, we need to copy our website folder over. But we want the version of our folder _with_ all the dependencies. That's why the `--from` flag allows us to specify a build stage. Build stages can be numbered, or if we give our stages aliases with the `AS` modifier in the `FROM` line (like `FROM ubuntu:18.04 AS base`), we can use those aliases. So we copy our installed folder over, then re-set the `WORKDIR`, as those are stage-specific.
+
+Our `node_modules` folder should still be there, but the rest of the bloat won't be. Let's rebuild and see what happens.
+
+That made a difference, huh? Consider using multi-stage builds for your production images, especially if storage is a concern (like on tiny AWS instances).
 
 
 
