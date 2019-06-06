@@ -1,0 +1,12 @@
+{
+    "data": {
+        "starships": [
+            "Enterprise",
+            "Yorktown",
+            "Saratoga",
+            "Constitution",
+            "Excelsior",
+            "Defiant"
+        ]
+    }
+}
