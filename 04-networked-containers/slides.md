@@ -21,6 +21,7 @@ patat:
     * SSH Private Key
 * Docker Hub Account
 * Terminal?
+* Class Repo?
 
 ## IP Concepts
 
@@ -116,5 +117,17 @@ Internet<---->Docker Host
       backend<--|--->frontend
                   
 ```
+
+# Backend 
+
+# Frontend
+
+## Deploying our App
+
+1. Build the images
+2. Create the network `node-net`
+3. Spin up the backend on `node-net` alone
+4. Spin up frontend on `node-net`
+5. Connect frontend to `bridge`
 
 
