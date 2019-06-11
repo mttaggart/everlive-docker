@@ -132,6 +132,10 @@ services:
 ```
 docker-compose -d up
 ```
+## Environment Variables
+
+* In `docker-compose.yml`
+* `.env` file
 
 Then, confirm all's working
 

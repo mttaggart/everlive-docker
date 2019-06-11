@@ -72,6 +72,10 @@ services:
       context: ./node-frontend
 ```
 
+### Environment Variables
+
+There are two ways to define environment variables for our services. We can use the `environment` key in our servife definition. Alternatively a separate `.env` file in the same directory as the `docker-compose.yml` This file follows the format of `KEY=val`, one per line. 
+
 ### Networks
 
 We covered private networking in the previous session. As we learned, private networks allow containers in multi-container apps to talk to each other, while exposing only the containers that need external network access. In a Docker Compose scenario, we can define networks in the `docker-compose.yml` file, then attach services to them directly.
