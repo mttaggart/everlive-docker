@@ -93,4 +93,4 @@ volumes:
 
 ## All together now
 
-A Wordpress blog, swarm style
+Our Ghost Blog, Swarm style
