@@ -1,0 +1,14 @@
+version: "3.7"
+
+services:
+  webserver:
+  
+  blog:
+
+  db:
+
+volumes:
+
+networks:
+
+secrets:
